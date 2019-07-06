@@ -11,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
+using StatlerWaldorfCorp.LocationService.Persistance;
 
 namespace StatlerWaldorfCorp.LocationService
 {
@@ -26,13 +27,14 @@ namespace StatlerWaldorfCorp.LocationService
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddScoped<ILocationRecordRepository, InMemoryLocationRecordRepository>();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo
                 {
                     Version = "v1",
-                    Title = "StatlerWaldorfCorp Team Service",
-                    Description = "A simple example ASP.NET Core Web API",
+                    Title = "StatlerWaldorfCorp Location Service",
+                    Description = "Location Service API Endpoints",
                     TermsOfService = new Uri("https://example.com/terms"),
                     Contact = new OpenApiContact
                     {
